@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  genetic-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: alexov3413/otus-user-app:v1.0
+    ports:
+      - "8080:8080"
+
+  postgres:
+    image: postgres
+    environment:
+       POSTGRES_PASSWORD: otus
+       POSTGRES_USER: otus
+       POSTGRES_DB: otus
+    ports:
+      - "5432:5432"

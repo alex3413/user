@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: otus-user-app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus
+    username: otus
+    password: otus
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 25
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    kubernetes:
+      config:
+        name: user-app-user-chart
+        namespace: otus-user-app
+      discovery:
+        all-namespaces: true
+        enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+server:
+  servlet:
+    context-path: /api

@@ -1,0 +1,44 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          oidc-client:
+            registration:
+              client-id: "test"
+              client-secret: "{noop}secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "password"
+                - "client_credentials"
+                - "authorization_code"
+              redirect-uris:
+                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+                - "https://oauth.pstmn.io/v1/callback"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8080/"
+              scopes:
+                - "openid"
+            require-authorization-consent: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus
+    username: otus
+    password: otus
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 25
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
