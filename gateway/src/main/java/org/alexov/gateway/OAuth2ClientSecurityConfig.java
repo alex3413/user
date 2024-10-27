@@ -15,6 +15,8 @@ public class OAuth2ClientSecurityConfig {
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 		http.authorizeExchange(ex -> ex.pathMatchers("/api/registration").permitAll()
 						.anyExchange().authenticated())
+				.csrf(ServerHttpSecurity.CsrfSpec::disable)
+				.cors(ServerHttpSecurity.CorsSpec::disable)
 				.oauth2Login(Customizer.withDefaults())
 			.oauth2Client(Customizer.withDefaults());
 

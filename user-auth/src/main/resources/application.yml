@@ -49,9 +49,9 @@ spring:
                   - "openid"
             require-authorization-consent: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/otus
-    username: otus
-    password: otus
+    url: jdbc:postgresql://localhost:15433/postgres
+    username: postgres
+    password: postgres
     hikari:
       auto-commit: false
       maximum-pool-size: 25

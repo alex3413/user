@@ -22,7 +22,7 @@
 
     <properties>
         <revision>0.0.1</revision>
-        <java.version>22</java.version>
+        <java.version>23</java.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
     </properties>
 
