@@ -1,0 +1,42 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: gateway
+  security:
+      oauth2:
+        client:
+          registration:
+            gateway:
+              provider: my-oidc-provider
+              client-id: gateway
+              client-secret: gateway-secret
+              authorization-grant-type: authorization_code
+              redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+              scope: openid,profile
+          provider:
+            my-oidc-provider:
+              issuer-uri: http://localhost:9000
+
+
+  cloud:
+     gateway:
+       routes:
+          - id: otus-user-app-registration
+            uri: http://localhost:8080
+            order: 1
+            predicates:
+#              - Host=arch.homework
+              - Path=/api/registration
+
+
+          - id: otus-user-app-api
+            uri: http://localhost:8080
+            order: 2
+            predicates:
+#              - Host=arch.homework
+              - Path=/api/user/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie

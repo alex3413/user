@@ -1,9 +1,6 @@
 package org.alexov.otus.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -26,5 +23,7 @@ public class OtusUser {
     private String email;
     @Column(name = "phone")
     private String phone;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private UserCred credentials;
 
 }

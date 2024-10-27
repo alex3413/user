@@ -20,7 +20,11 @@ spring:
       discovery:
         all-namespaces: true
         enabled: true
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://localhost:9000
 management:
   endpoints:
     web:
