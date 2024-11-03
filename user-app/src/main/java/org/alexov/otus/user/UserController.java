@@ -84,7 +84,7 @@ public class UserController {
                 .username(user.getUsername())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .build()).build());
-        return ResponseEntity.ok(save);
+        return ResponseEntity.ok(save.getId());
     }
 
     @GetMapping("/registration")
