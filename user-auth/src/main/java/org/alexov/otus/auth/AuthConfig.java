@@ -79,7 +79,10 @@ public class AuthConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println(bCryptPasswordEncoder.encode("gateway-secret"));
+        return bCryptPasswordEncoder;
     }
 
 //    @Bean
@@ -135,7 +138,7 @@ public class AuthConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
+        return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
     }
 
 }

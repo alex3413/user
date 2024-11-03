@@ -15,13 +15,12 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name = "credentials")
+@Table(name = "otus_user_cred")
 @NoArgsConstructor
 @Getter
 @Setter
 public class MyUserDetails implements UserDetails {
     @Id
-    private Long id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")

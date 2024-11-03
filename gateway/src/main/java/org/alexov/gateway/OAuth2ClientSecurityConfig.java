@@ -17,6 +17,7 @@ public class OAuth2ClientSecurityConfig {
 						.anyExchange().authenticated())
 				.csrf(ServerHttpSecurity.CsrfSpec::disable)
 				.cors(ServerHttpSecurity.CorsSpec::disable)
+				.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
 				.oauth2Login(Customizer.withDefaults())
 			.oauth2Client(Customizer.withDefaults());
 

@@ -22,10 +22,10 @@ spring:
               authorization-grant-types:
                 - "client_credentials"
               redirect-uris:
-                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+                - "http://localhost:8080/login/oauth2/code/oidc-client"
                 - "https://oauth.pstmn.io/v1/callback"
               post-logout-redirect-uris:
-                - "http://127.0.0.1:8080/"
+                - "http://localhost:8080/"
               scopes:
                 - "openid"
             require-authorization-consent: true
@@ -33,7 +33,7 @@ spring:
           gateway:
             registration:
               client-id: "gateway"
-              client-secret: "{noop}gateway-secret"
+              client-secret: "$2a$10$785uvU.zDkW3NX25FMG7Ue0QHf4LH4LXJNBgiwh3KK4vup.vVDDgO"
               client-authentication-methods:
                 - "client_secret_basic"
               authorization-grant-types:
@@ -41,12 +41,12 @@ spring:
                 - "client_credentials"
                 - "authorization_code"
               redirect-uris:
-                  - "http://127.0.0.1:8080/login/oauth2/code/gateway"
+                  - "http://localhost:8090/login/oauth2/code/gateway"
                   - "https://oauth.pstmn.io/v1/callback"
               post-logout-redirect-uris:
-                  - "http://127.0.0.1:8090/"
+                  - "http://localhost:8090/"
               scopes:
-                  - "openid"
+                  - openid
             require-authorization-consent: true
   datasource:
     url: jdbc:postgresql://localhost:15433/postgres

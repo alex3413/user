@@ -14,7 +14,7 @@ spring:
               client-secret: gateway-secret
               authorization-grant-type: authorization_code
               redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-              scope: openid,profile
+              scope: openid
           provider:
             my-oidc-provider:
               issuer-uri: http://localhost:9000
@@ -29,8 +29,6 @@ spring:
             predicates:
 #              - Host=arch.homework
               - Path=/api/registration
-
-
           - id: otus-user-app-api
             uri: http://localhost:8080
             order: 2

@@ -18,6 +18,7 @@
     <modules>
         <module>user-app</module>
         <module>user-auth</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
