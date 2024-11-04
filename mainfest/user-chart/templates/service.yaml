@@ -14,3 +14,19 @@ spec:
       protocol: TCP
       name: http
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "user-chart.fullname" . }}-auth
+  labels:
+    {{- include "user-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+      {{- include "user-chart.selectorLabels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetAuthPort }}
+      protocol: TCP
+      name: http

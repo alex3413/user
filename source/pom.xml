@@ -6,7 +6,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.3</version>
-        <relativePath/>
     </parent>
     <packaging>pom</packaging>
 
@@ -19,8 +18,8 @@
         <module>user-app</module>
         <module>user-auth</module>
         <module>gateway</module>
-        <module>billing</module>
-        <module>notification</module>
+<!--        <module>billing</module>-->
+<!--        <module>notification</module>-->
     </modules>
 
     <properties>

@@ -4,14 +4,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.alexov.otus</groupId>
+    <parent>
+        <groupId>org.alexov.otus</groupId>
+        <artifactId>user</artifactId>
+        <version>0.0.1</version>
+        <!--        <relativePath>../pom.xml</relativePath>-->
+    </parent>
+    <packaging>jar</packaging>
+    <groupId>org.alexov.otus.notification</groupId>
     <artifactId>notification</artifactId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
 
-    <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

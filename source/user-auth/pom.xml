@@ -6,7 +6,6 @@
         <groupId>org.alexov.otus</groupId>
         <artifactId>user</artifactId>
         <version>0.0.1</version>
-<!--        <relativePath>../pom.xml</relativePath>-->
     </parent>
     <packaging>jar</packaging>
 
@@ -16,9 +15,6 @@
     <name>user-auth</name>
     <description>user-auth</description>
 
-<!--    <properties>-->
-<!--        <java.version>22</java.version>-->
-<!--    </properties>-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
