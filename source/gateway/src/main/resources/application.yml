@@ -1,6 +1,11 @@
 server:
   port: 8090
 
+uri:
+  issuer: http://localhost:9000
+  user-app: http://localhost:8080
+  host: localhost
+
 spring:
   application:
     name: gateway
@@ -17,23 +22,22 @@ spring:
               scope: openid
           provider:
             my-oidc-provider:
-              issuer-uri: http://localhost:9000
-
+              issuer-uri: ${issuer.uri}
 
   cloud:
      gateway:
        routes:
           - id: otus-user-app-registration
-            uri: http://localhost:8080
+            uri: ${uri.user-app}
             order: 1
             predicates:
-#              - Host=arch.homework
+              - Host=${uri.host}
               - Path=/api/registration
           - id: otus-user-app-api
-            uri: http://localhost:8080
+            uri: ${uri.user-app}
             order: 2
             predicates:
-#              - Host=arch.homework
+              - Host=${uri.host}
               - Path=/api/user/**
             filters:
               - TokenRelay=

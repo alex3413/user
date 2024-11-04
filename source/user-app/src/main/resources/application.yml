@@ -1,3 +1,6 @@
+
+uri:
+  issuer: http://localhost:9000
 spring:
   application:
     name: otus-user-app
@@ -24,7 +27,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9000
+          issuer-uri: ${uri.issuer}
 management:
   endpoints:
     web:

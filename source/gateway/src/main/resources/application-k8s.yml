@@ -1,0 +1,4 @@
+uri:
+  issuer: http://localhost:9000
+  user-app: http://localhost:8080
+  host: arch.homework

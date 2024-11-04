@@ -4,6 +4,9 @@ server:
 logging:
   level:
     org.springframework.security: trace
+uri:
+  gateway: http://localhost:8090
+  issuer: http://localhost:9000
 
 spring:
   security:
@@ -41,10 +44,10 @@ spring:
                 - "client_credentials"
                 - "authorization_code"
               redirect-uris:
-                  - "http://localhost:8090/login/oauth2/code/gateway"
-                  - "https://oauth.pstmn.io/v1/callback"
+                  - ${uri.gateway}/login/oauth2/code/gateway
+                  - https://oauth.pstmn.io/v1/callback
               post-logout-redirect-uris:
-                  - "http://localhost:8090/"
+                  - ${uri.gateway}
               scopes:
                   - openid
             require-authorization-consent: true
