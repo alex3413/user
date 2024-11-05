@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "user-chart.fullname" . }}
+  name: {{ include "user-chart.fullname" . }}-user
   labels:
     {{- include "user-chart.labels" . | nindent 4 }}
 spec:
@@ -31,13 +31,13 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-user
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository.user }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort }}
+              containerPort: {{ .Values.service.targetPort.user }}
               protocol: TCP
           envFrom:
             - configMapRef:
@@ -47,6 +47,7 @@ spec:
           configMap:
             name: {{ include "user-chart.fullname" . }}
 ---
+{{/*auth-app*/}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -83,10 +84,60 @@ spec:
         - name: {{ .Chart.Name }}-auth
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.authRepo }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository.auth }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetAuthPort }}
+              containerPort: {{ .Values.service.targetPort.auth }}
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: {{ include "user-chart.fullname" . }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "user-chart.fullname" . }}
+---
+{{/*gateway*/}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "user-chart.fullname" . }}-gateway
+  labels:
+    {{- include "user-chart.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaAuthCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "user-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "user-chart.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "user-chart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-gateway
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository.gateway }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort.gateway }}
               protocol: TCP
           envFrom:
             - configMapRef:

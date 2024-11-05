@@ -6,8 +6,10 @@ replicaCount: 3
 replicaAuthCount: 1
 
 image:
-  repository: alexov3413/otus-user-app
-  authRepo: alexov3413/otus-auth-app
+  repository:
+    user: alexov3413/otus-user-app
+    auth: alexov3413/otus-auth-app
+    gateway: alexov3413/otus-gateway-app
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0"
 
@@ -43,8 +45,10 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  targetPort: 8080
-  targetAuthPort: 9000
+  targetPort:
+    user: 8080
+    auth: 9000
+    gateway: 8090
 
 ingress:
   enabled: true
@@ -84,7 +88,6 @@ autoscaling:
 
 configmap:
   data:
-    SERVER_SERVLET_CONTEXT-PATH: /api
     SPRING_CLOUD_KUBERNETES_DISCOVERY_ALL-NAMESPACES: "false"
     SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-otus:5432/otus
     application.yaml: |-
