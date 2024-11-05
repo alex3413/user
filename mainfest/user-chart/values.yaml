@@ -88,12 +88,16 @@ autoscaling:
 
 configmap:
   data:
+    URI_GATEWAY: http://user-app-user-chart-gateway
+    URI_ISSUER: http://user-app-user-chart-auth
+    URI_USER-APP: http://user-app-user-chart-user
     SPRING_CLOUD_KUBERNETES_DISCOVERY_ALL-NAMESPACES: "false"
     SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-otus:5432/otus
-    application.yaml: |-
-      spring:
-        datasource:
-          url: jdbc:postgresql://postgresql-otus:5432/otus
+
+secret:
+  name: user-app-secret
+  pgUsernameKey: PG_USERNAME
+  pgPasswordKey: PG_PASSWORD
 
 # Additional volumes on the output Deployment definition.
 volumes: []
