@@ -64,11 +64,11 @@ ingress:
   hosts:
     - host: arch.homework
       paths:
-        - path: /api
+        - path: /
           pathType: ImplementationSpecific
           backend:
             service:
-              name: user-app-user-chart
+              name: user-app-user-chart-gateway
               port:
                 number: 80
 #        - path: /
