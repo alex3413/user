@@ -22,7 +22,7 @@ spring:
               scope: openid
           provider:
             my-oidc-provider:
-              issuer-uri: ${issuer.uri}
+              issuer-uri: ${uri.issuer}
 
   cloud:
      gateway:
