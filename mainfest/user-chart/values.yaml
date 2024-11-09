@@ -70,6 +70,8 @@ autoscaling:
 
 configmap:
   data:
+    URI_GATEWAY: http://arch.homework
+    URI_ISSUER: http://arch.homework/auth
     URI_HOST: arch.homework
     SPRING_CLOUD_KUBERNETES_DISCOVERY_ALL-NAMESPACES: "false"
     SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-otus:5432/otus

@@ -1,11 +1,13 @@
 server:
   port: 8090
+  servlet:
+    context-path: /gateway
 
 uri:
   issuer: http://localhost:9000
   user-app: http://localhost:8080
   host: localhost
-
+  gateway: "{baseUrl}"
 spring:
   application:
     name: gateway
@@ -18,7 +20,7 @@ spring:
               client-id: gateway
               client-secret: gateway-secret
               authorization-grant-type: authorization_code
-              redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+              redirect-uri: ${uri.gateway}/login/oauth2/code/{registrationId}"
               scope: openid
           provider:
             my-oidc-provider:
