@@ -4,21 +4,21 @@ services:
     build:
       context: ..
       dockerfile: ./docker/user.Dockerfile
-    image: alexov3413/otus-user-app:v1.1
+    image: alexov3413/otus-user-app:v1.2
     ports:
       - "8080:8080"
   otus-auth-service:
     build:
       context: ..
       dockerfile: ./docker/auth.Dockerfile
-    image: alexov3413/otus-auth-app:v1.1
+    image: alexov3413/otus-auth-app:v1.2
     ports:
       - "9000:9000"
   otus-gateway-service:
     build:
       context: ..
       dockerfile: ./docker/gateway.Dockerfile
-    image: alexov3413/otus-gateway-app:v1.1
+    image: alexov3413/otus-gateway-app:v1.2
     ports:
       - "8090:8090"
 

@@ -9,7 +9,7 @@ image:
     auth: alexov3413/otus-auth-app
     gateway: alexov3413/otus-gateway-app
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.1"
+  tag: "v1.2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -70,8 +70,8 @@ autoscaling:
 
 configmap:
   data:
-    URI_GATEWAY: http://arch.homework
-    URI_ISSUER: http://arch.homework/auth
+    URI_GATEWAY: http://arch.homework/gateway
+    URI_ISSUER: http://user-service-user-chart-auth/auth
     URI_HOST: arch.homework
     SPRING_CLOUD_KUBERNETES_DISCOVERY_ALL-NAMESPACES: "false"
     SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-otus:5432/otus

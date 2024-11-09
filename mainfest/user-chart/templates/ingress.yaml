@@ -25,12 +25,5 @@ spec:
                 name: {{ $fullName }}-gateway
                 port:
                   number: {{$svcPort}}
-          - path: /auth
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: {{ $fullName }}-auth
-                port:
-                  number: {{$svcPort}}
     {{- end }}
 {{- end }}
