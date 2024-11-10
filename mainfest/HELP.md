@@ -4,11 +4,15 @@
 Для старта приложения необходимо развернуть БД:    
 - postgres:
     - helm install postgresql-otus bitnami/postgresql -f postgres.values.yaml -n otus-user-app
-
+Описание приложений:
+    - user-app - бизнес приложение предметной области "Управление пользователем"
+    - user-auth - сервис авторизации, реализован по спецификации oauth2 openid connect
+    - gateway - сервси маршрутизации и резолвинга путей, так же фильтр по аутентификации и авторизации
 Деплой приложения:
+- Манифесты сервисов и деплойментов всех приложений, разворачиваются одним чартом 
 - Создать секрет с конфигом подключения к БД 
   - kubectl apply -f user-app-secret.yaml -n otus-user-app
-- Deploy user-app
+- Deploy user-app, user-auth, gateway
   - helm install otus-user-app ./user-chart -n otus-user-app
 
 Сборка и отображение метрик:
