@@ -1,6 +1,6 @@
 # Default values for user-chart.
 
-replicaCount: 3
+replicaCount: 1
 replicaAuthCount: 1
 
 image:
@@ -9,7 +9,7 @@ image:
     auth: alexov3413/otus-auth-app
     gateway: alexov3413/otus-gateway-app
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.1"
+  tag: "v1.4"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -70,6 +70,7 @@ autoscaling:
 
 configmap:
   data:
+    URI_AUTH: http://arch.homework/auth
     URI_HOST: arch.homework
     SPRING_CLOUD_KUBERNETES_DISCOVERY_ALL-NAMESPACES: "false"
     SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-otus:5432/otus

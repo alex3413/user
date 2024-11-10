@@ -3,8 +3,10 @@ server:
 
 uri:
   issuer: http://localhost:9000
+  auth: http://localhost:9000
   user-app: http://localhost:8080
   host: localhost
+
 
 spring:
   application:
@@ -22,6 +24,9 @@ spring:
               scope: openid
           provider:
             my-oidc-provider:
+              authorization-uri: ${uri.auth}/oauth2/authorize
+              token-uri: ${uri.auth}/oauth2/token
+#              jwk-set-uri: ${uri.issuer}
               issuer-uri: ${uri.issuer}
 
   cloud:
@@ -33,6 +38,14 @@ spring:
             predicates:
               - Host=${uri.host}
               - Path=/api/registration
+
+          - id: otus-user-auth
+            uri: ${uri.issuer}
+            order: 1
+            predicates:
+              - Host=${uri.host}
+              - Path=/auth
+
           - id: otus-user-app-api
             uri: ${uri.user-app}
             order: 2

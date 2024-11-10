@@ -13,7 +13,7 @@ public class OAuth2ClientSecurityConfig {
 
 	@Bean
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-		http.authorizeExchange(ex -> ex.pathMatchers("/api/registration").permitAll()
+		http.authorizeExchange(ex -> ex.pathMatchers("/api/registration", "/auth/**").permitAll()
 						.anyExchange().authenticated())
 				.csrf(ServerHttpSecurity.CsrfSpec::disable)
 				.cors(ServerHttpSecurity.CorsSpec::disable)

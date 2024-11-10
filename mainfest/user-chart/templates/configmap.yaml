@@ -5,5 +5,5 @@ metadata:
 data:
   {{- toYaml .Values.configmap.data | nindent 2 }}
   URI_GATEWAY: http://{{ include "user-chart.fullname" . }}-gateway
-  URI_ISSUER: http://{{ include "user-chart.fullname" . }}-auth
+  URI_ISSUER: http://{{ include "user-chart.fullname" . }}-auth/auth
   URI_USER-APP: http://{{ include "user-chart.fullname" . }}-user
