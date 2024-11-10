@@ -7,7 +7,7 @@ logging:
   level:
     org.springframework.security: trace
 uri:
-  gateway: http://localhost:8090
+  gateway: http://localhost:8090/gateway
   issuer: http://localhost:9000
 
 spring:
