@@ -6,11 +6,13 @@
     <parent>
         <groupId>org.alexov.otus</groupId>
         <artifactId>core</artifactId>
-        <version>0.0.1</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>org.alexov.otus.docgen</groupId>
-    <artifactId>docgen</artifactId>
+    <packaging>jar</packaging>
+    <groupId>org.alexov.otus.artifact</groupId>
+    <artifactId>artifact-app</artifactId>
+    <version>${revision}</version>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

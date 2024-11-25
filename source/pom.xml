@@ -19,8 +19,9 @@
         <module>user-auth</module>
         <module>gateway</module>
         <module>core</module>
-<!--        <module>billing</module>-->
-<!--        <module>notification</module>-->
+        <module>project-app</module>
+        <module>notification-app</module>
+        <module>audit-app</module>
     </modules>
 
     <properties>

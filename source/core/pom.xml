@@ -6,21 +6,17 @@
         <groupId>org.alexov.otus</groupId>
         <artifactId>user</artifactId>
         <version>${revision}</version>
-        <!--        <relativePath>../pom.xml</relativePath>-->
     </parent>
+
     <packaging>pom</packaging>
-
-
     <artifactId>core</artifactId>
     <version>${revision}</version>
     <description>core generator artifacts</description>
     <name>core</name>
 
     <modules>
-        <module>manifest</module>
-        <module>umlschema</module>
-        <module>docgen</module>
-        <module>deploygen</module>
+        <module>artifact-app</module>
+        <module>manifest-app</module>
     </modules>
 
 
