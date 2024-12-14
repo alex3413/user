@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ManifestController {
 
     @PostMapping("/download")
-    public ResponseEntity<?> downloadManifest(@RequestParam MultipartFile manifest) {
+    public ResponseEntity<?> downloadManifest(@RequestPart MultipartFile manifest, @RequestParam Long projectId) {
         //TODO Download manifest to minio
         var uuid = UUID.randomUUID().toString();
         return ResponseEntity.ok(uuid);

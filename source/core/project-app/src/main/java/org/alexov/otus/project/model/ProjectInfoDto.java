@@ -11,5 +11,5 @@ public class ProjectInfoDto {
     private String description;
     private String author;
     private String version;
-    private String manifestId;
+    private ManifestInfo manifestInfo;
 }
