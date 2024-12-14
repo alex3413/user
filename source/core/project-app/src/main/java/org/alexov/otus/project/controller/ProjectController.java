@@ -17,6 +17,12 @@ public class ProjectController {
     @Operation(description = "Создать проект")
     @PostMapping("/create")
     public ResponseEntity<?> createProject(@RequestBody ProjectInfoDto projectInfo) {
+        // All activities by project it's has a work with project manifest
+        // TODO Requier update users audit
+        // TODO validate manifest in manifest-app
+        // TODO Notification user by new project with response validating data
         return ResponseEntity.ok().build();
     }
+
+
 }
