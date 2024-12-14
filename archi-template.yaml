@@ -1,0 +1,51 @@
+project:
+  version:
+  title:
+  description:
+components:
+  user-app:
+    type:
+    description:
+    image:
+    technologies:
+      - Java
+      - Spring
+      - Oauth2.1
+    links:
+      - id: auth-app
+        operations:
+          - id: operation1
+            direction: -->
+    api:
+    entity: component
+    title: Пользователи
+    event:
+      publish:
+      subscriber:
+  auth-app:
+    id:
+    type:
+    description:
+    image:
+    technologies:
+      - Java
+      - Spring
+      - Oauth2.1
+    links:
+      - a
+    api:
+    entity:
+    title:
+    event:
+      publish:
+      subscriber:
+interoperability:
+  operation1:
+    type: rest
+    method: GET
+    uri: /abv
+  operation2:
+    type: MQ
+    model:
+#contexts:
+#technologies:

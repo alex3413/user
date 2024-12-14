@@ -1,0 +1,49 @@
+
+uri:
+  issuer: http://localhost:9000
+spring:
+  application:
+    name: otus-notification-app
+  datasource:
+    url: jdbc:postgresql://localhost:15433/postgres
+    username: postgres
+    password: postgres
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 25
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    kubernetes:
+      config:
+        name: user-app-user-chart
+        namespace: otus-user-app
+      discovery:
+        all-namespaces: true
+        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${uri.issuer}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+server:
+  servlet:
+    context-path: /api
+auth:
+  enable: false
