@@ -31,6 +31,7 @@ public class ProjectProcessorFacade {
         try {
             ProjectEntity project = projectRepo.save(buildProject(projectInfoDto, profile));
             eventPublisher.publishEvent(ProjectEventType.PROJECT_CREATED, project);
+            eventPublisher.publishEvent(ProjectEventType.MANIFEST_CREATE, projectInfoDto.getManifestInfo());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

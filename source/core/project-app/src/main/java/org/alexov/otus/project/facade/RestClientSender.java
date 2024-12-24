@@ -1,6 +1,7 @@
 package org.alexov.otus.project.facade;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,8 +9,10 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class RestClientSender {
     private final RestTemplate restTemplate;
+    @Value("${url.user.profile}")
+    private String url;
 
     public Long getUserProfile() {
-        return restTemplate.getForObject("/getUserProfile", Long.class);
+        return restTemplate.getForObject(url, Long.class);
     }
 }
