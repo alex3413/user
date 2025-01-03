@@ -1,4 +1,4 @@
-package org.alexov.otus.project.model;
+package org.alexov.otus.common.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +22,7 @@ public class ProjectEntity {
     private String description;
     private String author;
     private String version;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-    private String status;
+    private LocalDateTime create_at;
+    private LocalDateTime update_at;
     private String projectData;
 }

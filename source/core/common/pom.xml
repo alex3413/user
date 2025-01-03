@@ -9,8 +9,8 @@
         <version>${revision}</version>
     </parent>
     <packaging>jar</packaging>
-    <groupId>org.alexov.otus.manifest</groupId>
-    <artifactId>manifest-app</artifactId>
+    <groupId>org.alexov.otus.commoon</groupId>
+    <artifactId>common-lib</artifactId>
     <version>${revision}</version>
 
     <properties>
@@ -18,11 +18,5 @@
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.alexov.otus.commoon</groupId>
-            <artifactId>common-lib</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

@@ -48,3 +48,9 @@ server:
 
 auth:
   enable: false
+
+service:
+  user: http://otus-user-app
+url:
+  user:
+    profile: ${service.user}/api/user/profile

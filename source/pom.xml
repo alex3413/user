@@ -21,6 +21,7 @@
         <module>core</module>
         <module>review-app</module>
 
+
         <module>notification-app</module>
         <module>audit-app</module>
     </modules>
@@ -40,6 +41,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.alexov.otus.commoon</groupId>
+                <artifactId>common-lib</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>

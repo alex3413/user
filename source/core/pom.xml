@@ -18,6 +18,7 @@
         <module>artifact-app</module>
         <module>manifest-app</module>
         <module>project-app</module>
+        <module>common</module>
     </modules>
 
 

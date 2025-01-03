@@ -1,4 +1,4 @@
-package org.alexov.otus.project.model;
+package org.alexov.otus.manifest.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,16 +14,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProjectEntity {
+public class ManifestEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private String description;
-    private String author;
     private String version;
+    private String projectId;
+    private String fileId;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private String status;
-    private String projectData;
+    private String manifestJson;
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,14 @@ public class UserController {
     private final UserRepository userRepository;
     private final CredRepo credRepo;
     private final PasswordEncoder passwordEncoder;
+
+    @GetMapping("/user/profile")
+    public ResponseEntity<Long> getUserProfile(){
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(name)
+                .map(u -> ResponseEntity.ok(u.getId()))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<?> findUserById(@PathVariable Long id, Authentication principal) throws AccessDeniedException {

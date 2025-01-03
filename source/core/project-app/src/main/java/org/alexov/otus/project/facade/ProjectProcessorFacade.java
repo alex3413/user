@@ -6,13 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.alexov.otus.project.model.ProjectEntity;
 import org.alexov.otus.project.model.ProjectInfoDto;
 import org.alexov.otus.project.model.ProjectRepo;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +41,8 @@ public class ProjectProcessorFacade {
                 .userId(userId)
                 .description(projectInfoDto.getDescription())
                 .projectData(objectMapper.writeValueAsString(projectInfoDto))
-                .create_at(LocalDateTime.now())
+                .status("PENDING")
+                .createAt(LocalDateTime.now())
                 .build();
     }
 }
