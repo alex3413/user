@@ -223,8 +223,52 @@ components:
           $ref: '#/components/schemas/ManifestData'
     ManifestData:
       description: Модель данных манифеста
-      type: Object
-
+      type: object
+      properties:
+        version:
+          type: string
+        projectId:
+          type: string
+        fileId:
+          type: string
+        components:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/ArchComponent'
+    ArchComponent:
+      description: Модель данных компонента архитектуры
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArchOperation'
+        type:
+          type: string
+        description:
+          type: string
+        dockerImage:
+          type: string
+        technologies:
+          type: array
+          items:
+            type: string
+    ArchOperation:
+      description: Модель данных операций компонента
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          type:
+            type: string
+          direction:
+            type: string
+          method:
+            type: string
+          uri:
+            type: string
     ApiResponse:
       type: object
       properties:

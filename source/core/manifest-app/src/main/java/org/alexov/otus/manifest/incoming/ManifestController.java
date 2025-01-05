@@ -19,8 +19,8 @@ public class ManifestController {
         return ResponseEntity.ok(uuid);
     }
 
-    @GetMapping("/info/{id}")
-    public ResponseEntity<?> getInfo(@PathVariable String id) {
+    @GetMapping("/info/{projectId}")
+    public ResponseEntity<?> getInfo(@PathVariable("projectId") String projectId) {
         //TODO find manifest by id, return info with validation protocol
         return ResponseEntity.ok().build();
     }
