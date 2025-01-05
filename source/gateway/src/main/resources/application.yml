@@ -4,8 +4,9 @@ server:
 uri:
   issuer: http://localhost:9000
   auth: http://localhost:9000
-  user-app: http://localhost:8080
   host: localhost
+  user-app: http://localhost:8080
+  project-app: http://localhost:8090
 
 
 spring:
@@ -52,6 +53,16 @@ spring:
             predicates:
               - Host=${uri.host}
               - Path=/api/user/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+
+          - id: otus-project-app-api
+            uri: ${uri.project-app}
+            order: 2
+            predicates:
+              - Host=${uri.host}
+              - Path=/api/project/**
             filters:
               - TokenRelay=
               - RemoveRequestHeader=Cookie

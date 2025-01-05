@@ -13,28 +13,12 @@ spec:
       {{- include "user-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "user-chart.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "user-chart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}-user
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository.user }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository.user }}:{{ .Values.image.tag }}"
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort.user }}
@@ -52,11 +36,11 @@ spec:
                   key: {{ .Values.secret.pgPasswordKey }}
           envFrom:
             - configMapRef:
-                name: {{ include "user-chart.fullname" . }}
+                name: {{ .Values.configMap.name }}
       volumes:
         - name: config
           configMap:
-            name: {{ include "user-chart.fullname" . }}
+            name: {{ .Values.configMap.name }}
 ---
 {{/*auth-app*/}}
 apiVersion: apps/v1
@@ -74,28 +58,12 @@ spec:
       {{- include "user-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "user-chart.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "user-chart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}-auth
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository.auth }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository.auth }}:{{ .Values.image.tag }}"
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort.auth }}
@@ -113,11 +81,11 @@ spec:
                   key: {{ .Values.secret.pgPasswordKey }}
           envFrom:
             - configMapRef:
-                name: {{ include "user-chart.fullname" . }}
+                name: {{ .Values.configMap.name }}
       volumes:
         - name: config
           configMap:
-            name: {{ include "user-chart.fullname" . }}
+            name: {{ .Values.configMap.name }}
 ---
 {{/*gateway*/}}
 apiVersion: apps/v1
@@ -135,28 +103,12 @@ spec:
       {{- include "user-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "user-chart.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "user-chart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}-gateway
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository.gateway }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository.gateway }}:{{ .Values.image.tag }}"
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort.gateway }}
@@ -174,8 +126,8 @@ spec:
                   key: {{ .Values.secret.pgPasswordKey }}
           envFrom:
             - configMapRef:
-                name: {{ include "user-chart.fullname" . }}
+                name: {{ .Values.configMap.name }}
       volumes:
         - name: config
           configMap:
-            name: {{ include "user-chart.fullname" . }}
+            name: {{ .Values.configMap.name }}

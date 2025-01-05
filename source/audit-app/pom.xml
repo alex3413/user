@@ -14,5 +14,13 @@
     <artifactId>audit-app</artifactId>
     <version>${revision}</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.alexov.otus.commoon</groupId>
+            <artifactId>common-lib</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
