@@ -157,8 +157,7 @@ paths:
 components:
   schemas:
     Notification:
-      description: Модель данных API уведомлений
-      type: Object
+      type: object
       properties:
         id:
           type: integer

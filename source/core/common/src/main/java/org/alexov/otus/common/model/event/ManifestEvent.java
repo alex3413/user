@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ManifestEvent {
     private Long manifestId;
+    private Long userId;
     private String projectId;
     private String projectVersion;
     private String manifestVersion;

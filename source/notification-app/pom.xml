@@ -8,12 +8,18 @@
         <groupId>org.alexov.otus</groupId>
         <artifactId>user</artifactId>
         <version>0.0.1</version>
-        <!--        <relativePath>../pom.xml</relativePath>-->
     </parent>
     <packaging>jar</packaging>
     <groupId>org.alexov.otus.notification</groupId>
     <artifactId>notification-app</artifactId>
     <version>${revision}</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.alexov.otus.commoon</groupId>
+            <artifactId>common-lib</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
