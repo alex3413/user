@@ -242,6 +242,7 @@ components:
         links:
           type: array
           items:
+            type: object
             $ref: '#/components/schemas/ArchOperation'
         type:
           type: string
@@ -255,10 +256,8 @@ components:
             type: string
     ArchOperation:
       description: Модель данных операций компонента
-      type: array
-      items:
-        type: object
-        properties:
+      type: object
+      properties:
           id:
             type: string
           type:

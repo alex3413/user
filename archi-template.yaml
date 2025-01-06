@@ -1,51 +1,91 @@
 project:
-  version:
-  title:
-  description:
+  version: v1.0.0
+  title: Архитектура как код
+  description: Учебный проект курса ОТУС "Архитектура как код"
+  #Комопненты системы
 components:
+  #Идентификатор компонента
   user-app:
-    type:
-    description:
-    image:
+    # Наименование
+    title: Пользователи
+    # тип компонента - окружение, сервис логики, модель данных и т.п.
+    type: service
+    description: микросервис логики работы с пользователями
+    # Докер образ
+    image: alexov3413/otus-user-app:v1.5
+    # Стек технологий, на котором реализуется компонент
     technologies:
       - Java
       - Spring
       - Oauth2.1
+    # Связи, они же зависимости
     links:
       - id: auth-app
         operations:
-          - id: operation1
-            direction: -->
+          - id: jwksKeySet
+            direction: <-->
+          - id: userActionEvent
+            direction: <--
+    # API сервиса, rest/soap/grpc
     api:
-    entity: component
-    title: Пользователи
+      - operationId: getUserByLogin
+    # Модели данных, могут быть домены или boundedContext
+    entity:
+      - '#/components/schemas/User'
+      - '#/components/schemas/Credentials'
+    # Сбытия, обрабатываемые компонентом
     event:
       publish:
+       - '#/components/schemas/UserEvent'
       subscriber:
+       - '#/components/schemas/NotificationEvent'
   auth-app:
-    id:
-    type:
-    description:
-    image:
+    type: authentication
+    description: Сервис аутентификации и авторизации
+    image: alexov3413/otus-auth-app:v1.5
     technologies:
       - Java
       - Spring
       - Oauth2.1
-    links:
-      - a
     api:
+      - operationId: loginUser
+      - operationId: authenticationCode
+      - operationId: jwksKeySet
     entity:
-    title:
+      - '#/components/schemas/TokenClaims'
+    title: Авторизация
     event:
       publish:
-      subscriber:
+        - '#/components/schemas/UserAuthAction'
 interoperability:
-  operation1:
-    type: rest
-    method: GET
-    uri: /abv
-  operation2:
+  getUserByLogin:
+    type: restful
+    get:
+      tags:
+        - user
+      summary: Получить данные пользователя по логину
+      description: ''
+      operationId: getUserByLogin
+      parameters:
+        - name: login
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found}
+  userActionEvent:
     type: MQ
-    model:
+    model: '#/components/schemas/UserAuthAction'
 #contexts:
 #technologies:

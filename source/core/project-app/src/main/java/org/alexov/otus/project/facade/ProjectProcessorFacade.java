@@ -22,16 +22,17 @@ public class ProjectProcessorFacade {
     // TODO Requier update users audit
     // TODO validate manifest in manifest-app
     // TODO Notification user by new project with response validating data
-    public ProjectEventType processProjectCreate(ProjectInfoDto projectInfoDto) {
+    public Long processProjectCreate(ProjectInfoDto projectInfoDto) {
         var profile = restClient.getUserProfile();
         try {
             ProjectEntity project = projectRepo.save(buildProject(projectInfoDto, profile));
+            projectInfoDto.getManifestInfo().setProjectId(project.getId().toString());
             eventPublisher.publishEvent(ProjectEventType.PROJECT_CREATED, project);
             eventPublisher.publishEvent(ProjectEventType.MANIFEST_CREATE, projectInfoDto.getManifestInfo());
+            return project.getId();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return ProjectEventType.PROJECT_CREATED;
     }
 
     private ProjectEntity buildProject(ProjectInfoDto projectInfoDto, Long userId) throws JsonProcessingException {

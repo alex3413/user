@@ -20,7 +20,7 @@ public class ProjectController {
 
     @Operation(description = "Создать проект")
     @PostMapping("/create")
-    public ResponseEntity<?> createProject(@RequestBody ProjectInfoDto projectInfo) {
+    public ResponseEntity<Long> createProject(@RequestBody ProjectInfoDto projectInfo) {
         return ResponseEntity.ok(processor.processProjectCreate(projectInfo));
     }
 

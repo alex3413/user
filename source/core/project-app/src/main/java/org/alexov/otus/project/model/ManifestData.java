@@ -20,13 +20,22 @@ public class ManifestData {
     @Data
     public static class ArchComponent {
         private String type;
+        private String title;
         private String description;
         private String dockerImage;
         private List<String> technologies;
-        private Map<String, ArchOperation> links = new HashMap<>();
+        private List<Link> links;
         private List<ArchOperation> operations = new ArrayList<>();
         private List<String> eventPublisher = new ArrayList<>();
         private List<String> eventSubscriber = new ArrayList<>();
+
+
+    }
+    @Builder
+    @Data
+    private static class Link {
+        private String dependencyId;
+        private List<ArchOperation> operations = new ArrayList<>();
     }
 
     @Builder
