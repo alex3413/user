@@ -32,5 +32,18 @@ public class ProjectController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<ProjectInfoDto> getProjectsByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping("/{projectId}")
+    public ResponseEntity<ProjectInfoDto> getProjectInfo(@PathVariable Long projectId) {
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{projectId}")
+    public ResponseEntity<Void> addUserToProject(@PathVariable Long projectId, @RequestBody Long userId) {
+        return ResponseEntity.ok().build();
+    }
 
 }
