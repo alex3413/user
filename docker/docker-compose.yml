@@ -6,7 +6,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/user.Dockerfile
-    image: alexov3413/otus-user-app:v1.5
+    image: alexov3413/otus-user-app:v1.6
     ports:
       - "8080:8080"
 
@@ -14,7 +14,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/audit.Dockerfile
-    image: alexov3413/otus-audit-app:v1.5
+    image: alexov3413/otus-audit-app:v1.6
     ports:
       - "8080:8080"
 
@@ -22,7 +22,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/manifest.Dockerfile
-    image: alexov3413/otus-manifest-app:v1.5
+    image: alexov3413/otus-manifest-app:v1.6
     ports:
       - "8080:8080"
 
@@ -30,7 +30,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/artifact.Dockerfile
-    image: alexov3413/otus-manifest-app:v1.5
+    image: alexov3413/otus-manifest-app:v1.6
     ports:
       - "8080:8080"
 
@@ -38,7 +38,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/notification.Dockerfile
-    image: alexov3413/otus-notification-app:v1.5
+    image: alexov3413/otus-notification-app:v1.6
     ports:
       - "8080:8080"
 
@@ -46,7 +46,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/project.Dockerfile
-    image: alexov3413/otus-project-app:v1.5
+    image: alexov3413/otus-project-app:v1.6
     ports:
       - "8080:8080"
 
@@ -54,7 +54,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/auth.Dockerfile
-    image: alexov3413/otus-auth-app:v1.5
+    image: alexov3413/otus-auth-app:v1.6
     ports:
       - "9000:9000"
 
@@ -62,7 +62,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/gateway.Dockerfile
-    image: alexov3413/otus-gateway-app:v1.5
+    image: alexov3413/otus-gateway-app:v1.6
     ports:
       - "8090:8090"
 
