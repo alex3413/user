@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+
   otus-user-service:
     build:
       context: ..
@@ -8,6 +9,7 @@ services:
     image: alexov3413/otus-user-app:v1.5
     ports:
       - "8080:8080"
+
   otus-audit-service:
     build:
       context: ..
@@ -15,6 +17,7 @@ services:
     image: alexov3413/otus-audit-app:v1.5
     ports:
       - "8080:8080"
+
   otus-manifest-service:
     build:
       context: ..
@@ -22,6 +25,15 @@ services:
     image: alexov3413/otus-manifest-app:v1.5
     ports:
       - "8080:8080"
+
+  otus-artifact-service:
+    build:
+      context: ..
+      dockerfile: ./docker/artifact.Dockerfile
+    image: alexov3413/otus-manifest-app:v1.5
+    ports:
+      - "8080:8080"
+
   otus-notification-service:
     build:
       context: ..
@@ -29,6 +41,7 @@ services:
     image: alexov3413/otus-notification-app:v1.5
     ports:
       - "8080:8080"
+
   otus-project-service:
     build:
       context: ..
@@ -36,6 +49,7 @@ services:
     image: alexov3413/otus-project-app:v1.5
     ports:
       - "8080:8080"
+
   otus-auth-service:
     build:
       context: ..
@@ -43,6 +57,7 @@ services:
     image: alexov3413/otus-auth-app:v1.5
     ports:
       - "9000:9000"
+
   otus-gateway-service:
     build:
       context: ..

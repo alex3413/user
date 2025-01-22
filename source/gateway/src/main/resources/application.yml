@@ -7,6 +7,8 @@ uri:
   host: localhost
   user-app: http://localhost:8080
   project-app: http://localhost:8090
+  manifest-app: http://localhost:8091
+  artifact-app: http://localhost:8092
 
 
 spring:
@@ -59,6 +61,26 @@ spring:
 
           - id: otus-project-app-api
             uri: ${uri.project-app}
+            order: 2
+            predicates:
+              - Host=${uri.host}
+              - Path=/api/project/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+
+          - id: otus-manifest-app-api
+            uri: ${uri.manifest-app}
+            order: 2
+            predicates:
+              - Host=${uri.host}
+              - Path=/api/project/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+
+          - id: otus-artifact-app-api
+            uri: ${uri.artifact-app}
             order: 2
             predicates:
               - Host=${uri.host}
