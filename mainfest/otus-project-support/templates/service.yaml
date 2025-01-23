@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "otus-project-support.fullname" . }}-audit
+  labels:
+    {{- include "otus-project-support.labels" . | nindent 4 }}-audit
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort.audit }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "otus-project-support.selectorLabels" . | nindent 4 }}-audit
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "otus-project-support.fullname" . }}-notification
+  labels:
+    {{- include "otus-project-support.labels" . | nindent 4 }}-notification
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort.notification }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "otus-project-support.selectorLabels" . | nindent 4 }}-notification
+

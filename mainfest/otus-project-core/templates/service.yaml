@@ -29,3 +29,19 @@ spec:
       name: http
   selector:
     {{- include "otus-project-core.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "otus-project-core.fullname" . }}-artifact
+  labels:
+    {{- include "otus-project-core.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort.artifact }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "otus-project-core.selectorLabels" . | nindent 4 }}

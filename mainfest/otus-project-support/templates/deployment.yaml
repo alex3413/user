@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "otus-project-support.fullname" . }}-audit
+  labels:
+    {{- include "otus-project-support.labels" . | nindent 4 }}-audit
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "otus-project-support.selectorLabels" . | nindent 6 }}-audit
+  template:
+    metadata:
+      labels:
+        {{- include "otus-project-support.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-audit
+          image: "{{ .Values.image.repository.audit }}:{{ .Values.image.tag }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort.audit }}
+              protocol: TCP
+          env:
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.pgUsernameKey }}
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.pgPasswordKey }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMap.name }}
+     volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.configMap.name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "otus-project-support.fullname" . }}-notification
+  labels:
+    {{- include "otus-project-support.labels" . | nindent 4 }}-notification
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "otus-project-support.selectorLabels" . | nindent 6 }}-notification
+  template:
+    metadata:
+      labels:
+        {{- include "otus-project-support.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-notification
+          image: "{{ .Values.image.repository.notification }}:{{ .Values.image.tag }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort.notification }}
+              protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.pgUsernameKey }}
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.pgPasswordKey }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMap.name }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.configMap.name }}

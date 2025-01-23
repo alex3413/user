@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  repository:
+    audit: alexov3413/otus-audit-app
+    notification: alexov3413/otus-notification-app
+  tag: "v1.6"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort:
+    audit: 8080
+    notification: 8080
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+
+
+configMap:
+  name: otus-app-configmap
+
+secret:
+  name: user-app-secret
+  pgUsernameKey: PG_USERNAME
+  pgPasswordKey: PG_PASSWORD

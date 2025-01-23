@@ -6,6 +6,7 @@ replicaCount: 1
 
 image:
   repository:
+    artifact: alexov3413/otus-artifact-app
     manifest: alexov3413/otus-manifest-app
     project: alexov3413/otus-project-app
   pullPolicy: IfNotPresent
@@ -34,7 +35,7 @@ service:
   targetPort:
     manifest: 8080
     project: 8080
-    artefact: 8080
+    artifact: 8080
 
 configMap:
   name: otus-app-configmap
