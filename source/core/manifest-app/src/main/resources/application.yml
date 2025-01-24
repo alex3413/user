@@ -1,9 +1,9 @@
 
 uri:
-  issuer: http://localhost:9000
+  issuer: http://localhost:9000/auth
 spring:
   application:
-    name: otus-notification-app
+    name: otus-manifest-app
   datasource:
     url: jdbc:postgresql://localhost:5432/otus
     username: otus
@@ -27,7 +27,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${uri.issuer}/auth
+          issuer-uri: ${uri.issuer}
 management:
   endpoints:
     web:
@@ -45,5 +45,13 @@ management:
 server:
   servlet:
     context-path: /api
+  port: 8091
+
 auth:
   enable: false
+
+service:
+  user: http://otus-user-app
+url:
+  user:
+    profile: ${service.user}/api/user/profile

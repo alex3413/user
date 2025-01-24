@@ -5,9 +5,9 @@ spring:
   application:
     name: otus-user-app
   datasource:
-    url: jdbc:postgresql://localhost:15433/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/otus
+    username: otus
+    password: otus
     hikari:
       auto-commit: false
       maximum-pool-size: 25
@@ -27,7 +27,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${uri.issuer}
+          issuer-uri: ${uri.issuer}/auth
 management:
   endpoints:
     web:
@@ -45,3 +45,6 @@ management:
 server:
   servlet:
     context-path: /api
+
+auth:
+  enable: true

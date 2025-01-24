@@ -2,20 +2,39 @@ server:
   port: 8090
 
 uri:
-  issuer: http://localhost:9000
-  auth: http://localhost:9000
+  issuer: http://localhost:9000/auth
+  auth: http://localhost:9000/auth
   host: localhost
   user-app: http://localhost:8080
   project-app: http://localhost:8090
   manifest-app: http://localhost:8091
   artifact-app: http://localhost:8092
 
+auth:
+  enable: true
 
 spring:
   application:
     name: gateway
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus
+    username: otus
+    password: otus
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 25
+#      driver-class-name:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  main:
+    allow-bean-definition-overriding: true
   security:
       oauth2:
+#        resourceserver:
+#          jwt:
+#            issuer-uri: ${uri.issuer}
         client:
           registration:
             gateway:
@@ -44,14 +63,14 @@ spring:
 
           - id: otus-user-auth
             uri: ${uri.issuer}
-            order: 1
+            order: 2
             predicates:
               - Host=${uri.host}
               - Path=/auth
 
           - id: otus-user-app-api
             uri: ${uri.user-app}
-            order: 2
+            order: 3
             predicates:
               - Host=${uri.host}
               - Path=/api/user/**
@@ -59,32 +78,32 @@ spring:
               - TokenRelay=
               - RemoveRequestHeader=Cookie
 
-          - id: otus-project-app-api
-            uri: ${uri.project-app}
-            order: 2
-            predicates:
-              - Host=${uri.host}
-              - Path=/api/project/**
-            filters:
-              - TokenRelay=
-              - RemoveRequestHeader=Cookie
-
-          - id: otus-manifest-app-api
-            uri: ${uri.manifest-app}
-            order: 2
-            predicates:
-              - Host=${uri.host}
-              - Path=/api/project/**
-            filters:
-              - TokenRelay=
-              - RemoveRequestHeader=Cookie
-
-          - id: otus-artifact-app-api
-            uri: ${uri.artifact-app}
-            order: 2
-            predicates:
-              - Host=${uri.host}
-              - Path=/api/project/**
-            filters:
-              - TokenRelay=
-              - RemoveRequestHeader=Cookie
+#          - id: otus-project-app-api
+#            uri: ${uri.project-app}
+#            order: 2
+#            predicates:
+#              - Host=${uri.host}
+#              - Path=/api/project/**
+#            filters:
+#              - TokenRelay=
+#              - RemoveRequestHeader=Cookie
+#
+#          - id: otus-manifest-app-api
+#            uri: ${uri.manifest-app}
+#            order: 2
+#            predicates:
+#              - Host=${uri.host}
+#              - Path=/api/project/**
+#            filters:
+#              - TokenRelay=
+#              - RemoveRequestHeader=Cookie
+#
+#          - id: otus-artifact-app-api
+#            uri: ${uri.artifact-app}
+#            order: 2
+#            predicates:
+#              - Host=${uri.host}
+#              - Path=/api/project/**
+#            filters:
+#              - TokenRelay=
+#              - RemoveRequestHeader=Cookie

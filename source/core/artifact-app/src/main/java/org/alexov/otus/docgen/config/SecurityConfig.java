@@ -1,9 +1,8 @@
-package org.alexov.otus.user;
+package org.alexov.otus.docgen.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,17 +10,17 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
+    @ConditionalOnProperty(value = "auth.enable", havingValue = "true")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/registration").permitAll()
-                        .anyRequest().authenticated())
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer((oauth2) -> oauth2
@@ -41,9 +40,13 @@ public class SecurityConfig {
                 );
         return http.build();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

@@ -1,13 +1,13 @@
 
 uri:
-  issuer: http://localhost:9000
+  issuer: http://localhost:9000/auth
 spring:
   application:
     name: otus-review-app
   datasource:
-    url: jdbc:postgresql://localhost:15433/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/otus
+    username: otus
+    password: otus
     hikari:
       auto-commit: false
       maximum-pool-size: 25
