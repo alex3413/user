@@ -1,4 +1,4 @@
-package org.alexov.otus.user;
+package org.alexov.otus.user.model;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -80,6 +80,10 @@
             <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.alexov.otus.commoon</groupId>
+            <artifactId>common-lib</artifactId>
+        </dependency>
     </dependencies>
 
 

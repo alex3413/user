@@ -11,7 +11,7 @@ uri:
   artifact-app: http://localhost:8092
 
 auth:
-  enable: true
+  enable: false
 
 spring:
   application:

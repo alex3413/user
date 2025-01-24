@@ -1,11 +1,13 @@
-package org.alexov.otus.user;
+package org.alexov.otus.user.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.alexov.otus.user.model.CredRepo;
+import org.alexov.otus.user.model.OtusUser;
+import org.alexov.otus.user.model.UserCred;
+import org.alexov.otus.user.model.UserRepository;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,11 +33,9 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<?> findUserById(@PathVariable Long id, Authentication principal) throws AccessDeniedException {
-        String username = principal.getName();
-        Optional<OtusUser> byId = userRepository.findById(id);
-        ResponseEntity<String> FORBIDDEN = isForbidden(byId, username);
-        if (FORBIDDEN != null) return FORBIDDEN;
+    public ResponseEntity<?> findUserById(@PathVariable Long id) throws AccessDeniedException {
+              Optional<OtusUser> byId = userRepository.findById(id);
+
 
         return ResponseEntity.ok(byId);
     }
@@ -60,10 +60,9 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody OtusUser user, Authentication authentication) throws BadRequestException {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody OtusUser user) throws BadRequestException {
         var otusUserOptional = userRepository.findById(id);
-        ResponseEntity<String> FORBIDDEN = isForbidden(otusUserOptional, authentication.getName());
-        if (FORBIDDEN != null) return FORBIDDEN;
+
 
         var otusUser = otusUserOptional.orElseThrow();
         otusUser.setUsername(user.getUsername());
@@ -75,12 +74,8 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
-        var otusUserOptional = userRepository.findById(id);
-        ResponseEntity<String> FORBIDDEN = isForbidden(otusUserOptional, authentication.getName());
-        if (FORBIDDEN != null) return FORBIDDEN;
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 
-        userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
